@@ -1,0 +1,91 @@
+<h2>Add trip!</h2>
+<form>
+  <mat-form-field>
+    <mat-label>Trip name</mat-label>
+    <input
+      matInput
+      type="text"
+      name="name"
+      placeholder="Trip name"
+      [(ngModel)]="newTrip.name"
+      required
+    />
+  </mat-form-field>
+
+  <google-map
+    id="map"
+    height="400px"
+    [center]="location"
+    (mapClick)="addMarker($event)"
+    [zoom]="4"
+  >
+    <map-marker #marker="mapMarker" [position]="location"> </map-marker>
+  </google-map>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input
+        matStartDate
+        formControlName="start"
+        placeholder="Start date"
+        required
+      />
+      <input matEndDate formControlName="end" placeholder="End date" required />
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+
+    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+      >Invalid start date</mat-error
+    >
+    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+      >Invalid end date</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      name="description"
+      placeholder="Sunbathing and eating cornsticks..."
+      [(ngModel)]="newTrip.description"
+      required
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <div>
+      <mat-toolbar>
+        <input
+          matInput
+          [value]="
+            images.length > 0 ? 'Images fetched' : 'Click to upload images'
+          "
+          readonly
+        />
+      </mat-toolbar>
+      <input
+        type="file"
+        id="tripImageInput"
+        name="tripImage"
+        accept="*.jpg.png"
+        (change)="getImages($event)"
+        required
+        multiple
+      />
+    </div>
+  </mat-form-field>
+  <ng-container *ngFor="let image of newTrip.images">
+    <img
+      [src]="image.content"
+      [alt]="image.name"
+      [ngClass]="{ pref: image.id == newTrip.thumbnail }"
+      (click)="newTrip.thumbnail = image.id"
+    />
+  </ng-container>
+
+  <button mat-raised-button color="warn" (click)="addTrip()">DODAJ</button>
+</form>

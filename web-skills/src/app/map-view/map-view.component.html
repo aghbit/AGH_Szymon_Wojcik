@@ -1,0 +1,19 @@
+<google-map
+  height="100vh"
+  width="100%"
+  [center]="center"
+  [zoom]="zoom"
+  (mapClick)="moveMap($event)"
+  (mapMousemove)="move($event)"
+>
+  <map-marker
+    #marker="mapMarker"
+    *ngFor="let markerData of markersData"
+    [position]="markerData.position"
+    [options]="markerData.options"
+    (mapClick)="openInfoWindow(marker, markerData.description)"
+  >
+  </map-marker>
+  <map-info-window>{{currDesc}}</map-info-window>
+</google-map>
+

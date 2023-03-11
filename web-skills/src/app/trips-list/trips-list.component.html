@@ -1,0 +1,4 @@
+<div *ngFor="let trip of trips" class="list-elem">
+    <img src="{{ trip.images[trip.thumbnail].content }}" />
+    <div matListItemTitle>{{ trip.name }}</div>
+</div>

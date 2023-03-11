@@ -1,0 +1,10 @@
+<mat-nav-list>
+  <ng-container *ngFor="let nav of navigation">
+    <mat-list-item routerLink="{{nav.page}}" routerLinkActive="active">
+      <mat-icon matListItemIcon fontIcon="{{nav.iconMaterial}}"></mat-icon>
+      <div matListItemTitle class="deleted">{{nav.content}}</div>
+    </mat-list-item>
+  </ng-container>
+
+</mat-nav-list>
+
