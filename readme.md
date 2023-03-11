@@ -1,3 +1,5 @@
-test repozytorium
 Szymon Wójcik
-pozdro 600 :)
+
+Tutaj zawieram kod z konkursu WordSkills.
+Aplikacja wykonana za pomocą Angulara + Firebase-a.
+Aplikacja nie będzie działać, ponieważ jest pozbawiona mojego klucza do API.
